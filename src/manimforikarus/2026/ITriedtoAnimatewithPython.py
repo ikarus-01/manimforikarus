@@ -79,9 +79,9 @@ class InstallingThings(IkarusScene):
 class ExplainingManimSpecifics(IkarusScene):
     """Explains the Scene class, construct method, and Mobjects"""
     def construct(self):
-        txt1 = Text("Scene", font_size=128).shift(LEFT * 3, UP * 3)
-        txt2 = Text("Construct", font_size=128).next_to(txt1, DOWN).shift(DOWN * 1.25)
-        txt3 = Text("Mobject", font_size=128).next_to(txt1, DOWN).shift(DOWN * 4)
+        txt1 = Text("Scene", font_size = 128).shift(LEFT * 3, UP * 3)
+        txt2 = Text("Construct", font_size = 128).next_to(txt1, DOWN).shift(DOWN * 1.25)
+        txt3 = Text("Mobject", font_size = 128).next_to(txt1, DOWN).shift(DOWN * 4)
         rct1 = Rectangle(color = ikarus_gold, fill_color = ikarus_gold, fill_opacity = 0.6).next_to(txt1).shift(DOWN * 0.25, RIGHT * 2)
         tri1 = Triangle(color = ikarus_gold, fill_color = ikarus_gold, fill_opacity = 0.6).next_to(txt2).shift(RIGHT)
         cir1 = Circle(color = ikarus_gold, fill_color = ikarus_gold, fill_opacity = 0.6).next_to(tri1, DOWN).shift(DOWN)
@@ -97,6 +97,24 @@ class ExplainingManimSpecifics(IkarusScene):
         self.play(rct1.animate.shift(UP * 5.5))
         self.play(rct1.animate.shift(DOWN * 5.5))
         self.wait(3)
-
+class ExplainingDataSets(IkarusScene):
+    """Explains the utility of Manim in data visualization"""
+    def construct(self):
+        txt1 = Text("Data Sets in Manim", font_size = 96).shift(UP * 3)
+        tex1 = Tex(r"$y=2x+1$", font_size = 96).shift(LEFT * 4)
+        ax1 = Axes(x_range=[0, 3], y_range=[0, 8], x_length= 8, y_length = 6).next_to(tex1).shift(DOWN * 0.75)
+        gra1 = ax1.plot(lambda x : 2 * x + 1, [0, 3])
+        rct1 = Rectangle(fill_color = ikarus_gold, color = ikarus_gold, fill_opacity = 0.6, height = 6, width = 2).next_to(txt1, DOWN).shift(LEFT * 4)
+        cir1 = Circle(fill_color = ikarus_gold, color = ikarus_gold, fill_opacity = 0.6, radius = 2)
+        ax2 = Axes([-2, 2], [-2, 2], x_length = 4, y_length = 4).next_to(cir1)
+        self.play(Write(txt1))
+        self.wait(3)
+        self.play(Write(tex1), Create(ax1), Create(gra1))
+        self.wait(3)
+        self.play(Unwrite(tex1), Uncreate(ax1), Uncreate(gra1))
+        self.play(Create(rct1))
+        self.play(Create(cir1))
+        self.play(Create(ax2))
+        self.wait(3)
 
 
