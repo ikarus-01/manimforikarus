@@ -9,7 +9,7 @@ class IkarusScene(Scene):
         super().__init__(renderer, camera_class, always_update_mobjects, random_seed, skip_animations)
         self.camera.background_color = ikarus_purple
 class ExplainingManim(IkarusScene):
-    """Explains Basic Information on Manim"""
+    """Explains basic information about Manim"""
     def construct(self):
         ban = ManimBanner()
         txt1 = Text("This is Manim.", font_size = 128).next_to(ban, DOWN)
@@ -58,6 +58,24 @@ class ExplainingManim(IkarusScene):
         self.wait(3)
         self.play(FadeIn(img2), Write(txt6))
         self.wait(3)
+class InstallingThings(IkarusScene):
+    """Showcases a few things required to setup Manim"""
+    def construct(self):
+        img1 = ImageMobject("Homebrew_logo")
+        tex1 = Tex(r"\LaTeX", font_size=192)
+        tex2 = Tex(r"$\sum_{k=1}^{n}k^2=\frac{n(n+1)(2n+1)}{6}$", font_size = 128)
+        img2 = ImageMobject("package").scale(0.75).shift(UP)
+        txt1 = Text("Cairo", font_size=192).next_to(img2, DOWN)
+        self.play(FadeIn(img1))
+        self.wait(3)
+        self.play(FadeOut(img1))
+        self.play(Write(tex1))
+        self.wait(3)
+        self.play(tex1.animate.shift(UP * 2))
+        self.play(Write(tex2))
+        self.wait(3)
+        self.play(FadeOut(tex1, tex2),FadeIn(img2), Write(txt1))
+        self.wait(8)
         
 
 
