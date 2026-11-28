@@ -76,8 +76,27 @@ class InstallingThings(IkarusScene):
         self.wait(3)
         self.play(FadeOut(tex1, tex2),FadeIn(img2), Write(txt1))
         self.wait(8)
-        
-
+class ExplainingManimSpecifics(IkarusScene):
+    """Explains the Scene class, construct method, and Mobjects"""
+    def construct(self):
+        txt1 = Text("Scene", font_size=128).shift(LEFT * 3, UP * 3)
+        txt2 = Text("Construct", font_size=128).next_to(txt1, DOWN).shift(DOWN * 1.25)
+        txt3 = Text("Mobject", font_size=128).next_to(txt1, DOWN).shift(DOWN * 4)
+        rct1 = Rectangle(color = ikarus_gold, fill_color = ikarus_gold, fill_opacity = 0.6).next_to(txt1).shift(DOWN * 0.25, RIGHT * 2)
+        tri1 = Triangle(color = ikarus_gold, fill_color = ikarus_gold, fill_opacity = 0.6).next_to(txt2).shift(RIGHT)
+        cir1 = Circle(color = ikarus_gold, fill_color = ikarus_gold, fill_opacity = 0.6).next_to(tri1, DOWN).shift(DOWN)
+        self.play(Write(txt1))
+        self.play(Create(rct1))
+        self.wait(3)
+        self.play(Write(txt2))
+        self.play(Transform(rct1, tri1))
+        self.wait(3)
+        self.play(Write(txt3))
+        self.play(Transform(rct1, cir1))
+        self.wait(3)
+        self.play(rct1.animate.shift(UP * 5.5))
+        self.play(rct1.animate.shift(DOWN * 5.5))
+        self.wait(3)
 
 
 
