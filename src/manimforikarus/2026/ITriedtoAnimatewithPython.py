@@ -116,5 +116,44 @@ class ExplainingDataSets(IkarusScene):
         self.play(Create(cir1))
         self.play(Create(ax2))
         self.wait(3)
+class ExplainingTheMandelbrotSet(IkarusScene):
+    """Explains the Mandelbrot Set"""
+    def construct(self):
+        txt1 = Text("The Mandelbrot Set", font_size = 96).shift(UP * 3)
+        tex1 = Tex(r"$5+3i$", font_size = 128).shift(LEFT * 4)
+        cp1 = ComplexPlane(x_range = [-6, 6], y_range = [-6, 6], x_length = 6, y_length = 6).next_to(tex1).shift(RIGHT * 2, DOWN * 0.75)
+        p1 = cp1.number_to_point(complex(5, 3))
+        d1 = Dot(p1, color = ikarus_gold)
+        l1 = cp1.get_vertical_line(p1, stroke_width = 5)
+        l2 = cp1.get_horizontal_line(p1, stroke_width = 5)
+        tex2 = Tex(r"$f(z)=z^2+c$", font_size = 128)
+        cp2 = ComplexPlane(x_range = [-2, 2], y_range = [-2, 2], x_length = 4, y_length = 4)
+        cir1 = Circle(radius = 2, color = ikarus_gold)
+        num1 = complex(0, 1)
+        p2 = cp2.number_to_point(num1)
+        d2 = Dot(p2)
+        self.play(Write(txt1))
+        self.wait(3)
+        self.play(Create(cp1))
+        self.wait(3)
+        self.play(Write(tex1), Create(d1))
+        self.wait(3)
+        self.play(Create(l1))
+        self.wait(3)
+        self.play(Create(l2))
+        self.wait(3)
+        self.play(Uncreate(l1), Uncreate(l2), Uncreate(d1), Uncreate(cp1), Unwrite(tex1))
+        self.wait(3)
+        self.play(Write(tex2))
+        self.wait(3)
+        self.play(Unwrite(tex2))
+        self.play(Create(cp2), Create(cir1))
+        self.wait(3)
+        self.play(Create(d2))
+        for n in range(0, 5):
+            num1 = num1 * num1 + num1
+            self.play(Transform(d2, Dot(cp2.number_to_point(num1))))
+        self.wait(3)
 
+        
 
